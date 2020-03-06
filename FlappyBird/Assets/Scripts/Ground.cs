@@ -8,6 +8,7 @@ public class Ground : MonoBehaviour
     [SerializeField] private Bird bird;
     [SerializeField] private float speed;
     [SerializeField] private Transform nextPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class Ground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(bird == null || bird != null && !bird.IsDead()){
+        if(bird == null || (bird != null && !bird.IsDead())){
             transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
         }
     }

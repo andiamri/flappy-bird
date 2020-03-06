@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Bird : MonoBehaviour
 {
     [SerializeField] private float upForce = 300;
     [SerializeField] private bool isDead;
     [SerializeField] private UnityEvent OnDead, OnJump;
+    [SerializeField] private int score = 0;
+    [SerializeField] private UnityEvent OnAddPoint;
+
+    public Text scoreText;
 
     private Animator anim;
     private Rigidbody2D rigid;
@@ -16,6 +21,7 @@ public class Bird : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -42,6 +48,7 @@ public class Bird : MonoBehaviour
             OnDead.Invoke();
         }
         isDead = true;
+        
     }
     public void Jump()
     {
@@ -60,5 +67,16 @@ public class Bird : MonoBehaviour
     {
         Dead();
         anim.enabled = false;
+    }
+    public void AddScore(int value)
+    {
+        score += value;
+
+        if(OnAddPoint != null)
+        {
+            OnAddPoint.Invoke();
+        }
+        scoreText.text = score.ToString();
+        Debug.Log(score);
     }
 }
