@@ -12,6 +12,8 @@ public class Bird : MonoBehaviour
     [SerializeField] private int score = 0;
     [SerializeField] private UnityEvent OnAddPoint;
 
+    
+
     public Text scoreText;
 
     private Animator anim;
@@ -36,6 +38,11 @@ public class Bird : MonoBehaviour
         {
             anim.enabled = false;
         }
+       
+    }
+    public void Shoot()
+    {
+        
     }
     public bool IsDead()
     {
