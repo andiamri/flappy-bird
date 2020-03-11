@@ -27,7 +27,7 @@ public class Bird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isDead && Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if(!isDead && Input.GetMouseButtonDown(0) || !isDead && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
             anim.enabled = true;
