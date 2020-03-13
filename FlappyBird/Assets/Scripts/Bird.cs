@@ -62,6 +62,10 @@ public class Bird : MonoBehaviour
             GameObject bullet = (GameObject)Instantiate(projectile, projectieSpawner.transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
             score = score -1;
+            if (bullet.GetComponent<Transform>().position.x > 50)
+            {
+                Destroy(bullet.gameObject);
+            }
             
         }
     }

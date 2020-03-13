@@ -7,8 +7,10 @@ using UnityEngine;
 public class GroundSpawner : MonoBehaviour
 {
     [SerializeField] private Ground groundRef;
+    
 
     private Ground prevGround;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +30,18 @@ public class GroundSpawner : MonoBehaviour
 
             newGround.gameObject.SetActive(true);
             prevGround.SetNextGroundObject(newGround.gameObject);
+            
+
+            
+
         }
+        
     }
+   
     private void OnTriggerExit2D(Collider2D collision)
     {
         Ground ground = collision.GetComponent<Ground>();
+        
 
         if (ground)
         {
@@ -40,5 +49,7 @@ public class GroundSpawner : MonoBehaviour
 
             SpawnGround();
         }
+        
+        
     }
 }
