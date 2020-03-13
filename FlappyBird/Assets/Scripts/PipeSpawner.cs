@@ -6,12 +6,13 @@ public class PipeSpawner : MonoBehaviour
 {
     [SerializeField] private Bird bird;
     [SerializeField] private Pipe pipeUp, pipeDown;
+    [SerializeField] private Projectile bullet;
     [SerializeField] private float spawnInterval = 1;
     [SerializeField] public float holeSize;
     [SerializeField] private float minMaxOffset = 1;
     [SerializeField] private Point point;
 
-    public int divider = 2;
+    
 
     private Coroutine CR_Spawn;
     // Start is called before the first frame update
@@ -50,8 +51,8 @@ public class PipeSpawner : MonoBehaviour
 
         newPipeDown.gameObject.SetActive(true);
 
-        newPipeUp.transform.position += Vector3.up * (holeSize / divider);
-        newPipeDown.transform.position += Vector3.down *(holeSize / divider);
+        newPipeUp.transform.position += Vector3.up * (holeSize / 2);
+        newPipeDown.transform.position += Vector3.down *(holeSize / 2);
 
         float y = minMaxOffset * Mathf.Sin(Time.time);
         newPipeUp.transform.position += Vector3.up * y;

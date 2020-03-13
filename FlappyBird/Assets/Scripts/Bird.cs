@@ -10,7 +10,17 @@ public class Bird : MonoBehaviour
     [SerializeField] private bool isDead;
     [SerializeField] private UnityEvent OnDead, OnJump;
     [SerializeField] private int score = 0;
-    [SerializeField] private UnityEvent OnAddPoint;
+    [SerializeField] private int bullet = 0;
+    [SerializeField] private UnityEvent OnAddPoint,OnAddBullet;
+
+    public GameObject projectile;
+    public Transform projectieSpawner;
+    public float speed;
+
+    
+
+
+    bool isCanShoot = false;
 
     
 
@@ -38,11 +48,22 @@ public class Bird : MonoBehaviour
         {
             anim.enabled = false;
         }
+        if (!isDead && Input.GetMouseButtonDown(1) && score > 0)
+        {
+            Shoot();
+            scoreText.text = score.ToString();
+        }
        
     }
     public void Shoot()
     {
-        
+        if (isCanShoot)
+        {
+            GameObject bullet = (GameObject)Instantiate(projectile, projectieSpawner.transform.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
+            score = score -1;
+            
+        }
     }
     public bool IsDead()
     {
@@ -74,7 +95,10 @@ public class Bird : MonoBehaviour
     {
         Dead();
         anim.enabled = false;
+
+        
     }
+    
     public void AddScore(int value)
     {
         score += value;
@@ -84,6 +108,16 @@ public class Bird : MonoBehaviour
             OnAddPoint.Invoke();
         }
         scoreText.text = score.ToString();
-        Debug.Log(score);
+
+        if(score >= 1)
+        {
+            isCanShoot = true;
+        }
+        else
+        {
+            isCanShoot = false;
+        }
+
     }
+    
 }
